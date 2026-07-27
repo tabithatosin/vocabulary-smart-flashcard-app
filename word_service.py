@@ -164,21 +164,51 @@ Example: <example sentence>
 Memory Trick: <memory trick>
 """
 
-    try:
-        response = gemini_client.models.generate_content(
-            model="gemini-3.5-flash",
-            contents=prompt,
-        )
+    max_retries = 3
 
-        if not response.text:
-            raise RuntimeError("Gemini returned an empty response.")
+    for attempt in range(max_retries):
+        try:
+            response = gemini_client.models.generate_content(
+                model="gemini-3.5-flash",
+                contents=prompt,
+            )
 
-        return response.text
+            if not response.text:
+                raise RuntimeError(
+                    "Gemini returned an empty response."
+                )
 
-    except Exception as error:
-        raise RuntimeError(
-            f"Gemini AI request failed: {error}"
-        )
+            return response.text
+
+        except Exception as error:
+            error_message = str(error)
+
+            if "503" in error_message or "UNAVAILABLE" in error_message:
+                if attempt < max_retries - 1:
+                    import time
+                    time.sleep(2 ** attempt)
+                    continue
+
+                raise RuntimeError(
+                    "Gemini AI is temporarily unavailable after several "
+                    "attempts. Please try again later."
+                )
+
+            if "429" in error_message or "RESOURCE_EXHAUSTED" in error_message:
+                raise RuntimeError(
+                    "Gemini AI request limit reached. "
+                    "Please wait a moment and try again."
+                )
+
+            if "404" in error_message or "NOT_FOUND" in error_message:
+                raise RuntimeError(
+                    "The selected Gemini AI model is unavailable. "
+                    "Please check the configured model."
+                )
+
+            raise RuntimeError(
+                f"Gemini AI request failed: {error_message}"
+            )
         
 class Word:
     """Represent a vocabulary word and its learning information."""
