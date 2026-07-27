@@ -202,7 +202,33 @@ class Word:
         self.ai_explanation = ""
         self.ai_example = ""
         self.memory_trick = ""
-        
+    def add_ai_content(self):
+        """Generate and store AI learning content for this word."""
+
+        ai_response = get_ai_content(self.word)
+
+        lines = ai_response.splitlines()
+
+        for line in lines:
+            line = line.strip()
+
+            # Remove markdown formatting from the beginning
+            line = line.lstrip("*#").strip()
+
+            if line.lower().startswith("explanation:"):
+                self.ai_explanation = line.split(
+                    ":", 1
+                )[1].strip()
+
+            elif line.lower().startswith("example:"):
+                self.ai_example = line.split(
+                    ":", 1
+                )[1].strip()
+
+            elif line.lower().startswith("memory trick:"):
+                self.memory_trick = line.split(
+                    ":", 1
+                )[1].strip()
     @classmethod
     def from_dictionary_data(cls, data):
         """Create a Word object from parsed dictionary data."""
@@ -216,6 +242,23 @@ class Word:
             antonyms=data.get("antonyms", []),
         )
 if __name__ == "__main__":
-    result = get_ai_content("book")
+    client = DictionaryClient()
 
-    print(result)
+    raw_data = client.lookup("book")
+
+    dictionary_data = client.parse_entry(raw_data)
+
+    word = Word.from_dictionary_data(dictionary_data)
+
+    word.add_ai_content()
+
+    print("WORD:", word.word)
+    print("PHONETICS:", word.phonetics)
+    print("DEFINITIONS:", word.definitions)
+    print("EXAMPLES:", word.examples)
+    print("SYNONYMS:", word.synonyms)
+    print("ANTONYMS:", word.antonyms)
+
+    print("\nAI EXPLANATION:", word.ai_explanation)
+    print("AI EXAMPLE:", word.ai_example)
+    print("MEMORY TRICK:", word.memory_trick)
