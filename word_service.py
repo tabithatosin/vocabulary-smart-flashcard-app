@@ -1,5 +1,27 @@
 import re
 import requests
+import os
+from dotenv import load_dotenv
+from google import genai
+
+load_dotenv()
+import os
+import re
+import requests
+
+from dotenv import load_dotenv
+from google import genai
+
+
+load_dotenv()
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+if GEMINI_API_KEY:
+    gemini_client = genai.Client(api_key=GEMINI_API_KEY)
+else:
+    gemini_client = None
+    
 def clean_word(word):
     """Clean and validate a word before dictionary lookup."""
     word = word.strip().lower()
@@ -118,13 +140,82 @@ class DictionaryClient:
             "synonyms": synonyms,
             "antonyms": antonyms,
         }
+def get_ai_content(word):
+    """Generate AI learning content for a vocabulary word."""
 
+    if gemini_client is None:
+        raise RuntimeError(
+            "Gemini API key is missing. AI features are unavailable."
+        )
 
+    prompt = f"""
+You are a vocabulary learning assistant.
+
+For the word "{word}", provide:
+
+1. A simple explanation that a learner can easily understand.
+2. One simple example sentence using the word.
+3. One memorable and creative memory trick to help the learner remember the word.
+
+Return your response in exactly this format:
+
+Explanation: <simple explanation>
+Example: <example sentence>
+Memory Trick: <memory trick>
+"""
+
+    try:
+        response = gemini_client.models.generate_content(
+            model="gemini-3.5-flash",
+            contents=prompt,
+        )
+
+        if not response.text:
+            raise RuntimeError("Gemini returned an empty response.")
+
+        return response.text
+
+    except Exception as error:
+        raise RuntimeError(
+            f"Gemini AI request failed: {error}"
+        )
+        
+class Word:
+    """Represent a vocabulary word and its learning information."""
+
+    def __init__(
+        self,
+        word,
+        phonetics=None,
+        definitions=None,
+        examples=None,
+        synonyms=None,
+        antonyms=None,
+    ):
+        self.word = word
+        self.phonetics = phonetics or []
+        self.definitions = definitions or []
+        self.examples = examples or []
+        self.synonyms = synonyms or []
+        self.antonyms = antonyms or []
+
+        self.ai_explanation = ""
+        self.ai_example = ""
+        self.memory_trick = ""
+        
+    @classmethod
+    def from_dictionary_data(cls, data):
+        """Create a Word object from parsed dictionary data."""
+
+        return cls(
+            word=data.get("word", ""),
+            phonetics=data.get("phonetics", []),
+            definitions=data.get("definitions", []),
+            examples=data.get("examples", []),
+            synonyms=data.get("synonyms", []),
+            antonyms=data.get("antonyms", []),
+        )
 if __name__ == "__main__":
-    client = DictionaryClient()
-
-    raw_data = client.lookup("book")
-
-    result = client.parse_entry(raw_data)
+    result = get_ai_content("book")
 
     print(result)
