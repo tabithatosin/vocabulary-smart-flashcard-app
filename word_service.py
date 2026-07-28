@@ -232,6 +232,10 @@ class Word:
         self.ai_explanation = ""
         self.ai_example = ""
         self.memory_trick = ""
+    @property
+    def simple_explanation(self):
+      return self.ai_explanation
+  
     def add_ai_content(self):
         """Generate and store AI learning content for this word."""
 
