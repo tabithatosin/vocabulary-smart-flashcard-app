@@ -1,0 +1,42 @@
+[
+    {
+        "word": "engineer",
+        "back": "**Simple:** An engineer is a person who designs, builds, or fixes things like machines, roads, bridges, or computers.\n\n**Example:** The engineer designed a safe and modern bridge for the city.\n\n**Trick:** Think of the words **engine** and **near**. An **engineer** always wants an **engine near** them so they can build, fix, or improve it!\n\n**Synonym:** \n\n**Antonym:** ",
+        "interval": 1,
+        "repetitions": 1,
+        "ef": 2.6,
+        "next_review": "2026-07-30"
+    },
+    {
+        "word": "absolute",
+        "back": "**Simple:** Total, complete, and 100% certain, with no doubts or exceptions.\n\n**Example:** I have absolute trust that my best friend will keep my secret.\n\n**Trick:** Think of the word **absolute** as \"**Ab-salute**.\" Picture a soldier giving a big **salute** to show **absolute** (complete and total) respect.\n\n**Synonym:** unlimited, independent, autocratic, unrestricted, unconditional, categorical, despotic\n\n**Antonym:** relative, limited, dependent, conditional",
+        "interval": 1,
+        "repetitions": 0,
+        "ef": 2.5,
+        "next_review": "2026-07-29"
+    },
+    {
+        "word": "love",
+        "back": "**Simple:** To have a very strong feeling of liking or caring about someone or something.\n\n**Example:** I love my family and my dog.\n\n**Trick:** The letter **V** in the middle of the word lo**v**e looks like the bottom point of a heart (\u2764\ufe0f). Whenever you see lo**v**e, think of a heart!\n\n**Synonym:** aphrodisia, love bird, baby, pet, mate, sleep with, romance, sweetheart, sex, the beast with two backs, coitus, honey, carnality, enjoy, adore, darling, lover, go to bed with, sweetie, cherish\n\n**Antonym:** spite, angst, despise, malice, hate, hatred, indifference",
+        "interval": 1,
+        "repetitions": 0,
+        "ef": 2.5,
+        "next_review": "2026-07-29"
+    },
+    {
+        "word": "international",
+        "back": "**Simple:** Something that involves or relates to two or more different countries.\n\n**Example:** The airport has many international flights to different countries.\n\n**Trick:** Split the word into **Inter** (which sounds like **enter**) and **national** (countries). Picture yourself **entering** a new **nation** on an **international** trip!\n\n**Synonym:** \n\n**Antonym:** ",
+        "interval": 1,
+        "repetitions": 1,
+        "ef": 2.5,
+        "next_review": "2026-07-30"
+    },
+    {
+        "word": "book",
+        "back": "**Simple:** \n\n**Example:** \n\n**Trick:** \n\n**Synonym:** libretto, volume, booklet, record, account, tome\n\n**Antonym:** ",
+        "interval": 1,
+        "repetitions": 0,
+        "ef": 2.5,
+        "next_review": "2026-07-29"
+    }
+]
