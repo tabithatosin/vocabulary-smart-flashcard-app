@@ -1,0 +1,38 @@
+[
+    {
+        "date": "2026-07-29T13:06:45.231018",
+        "score": 1,
+        "word": "What is the meaning of 'love'?",
+        "type": "mcq"
+    },
+    {
+        "date": "2026-07-29T13:06:52.765965",
+        "score": 1,
+        "word": "What is the meaning of 'engineer'?",
+        "type": "mcq"
+    },
+    {
+        "date": "2026-07-29T13:07:00.889028",
+        "score": 1,
+        "word": "What is the meaning of 'book'?",
+        "type": "mcq"
+    },
+    {
+        "date": "2026-07-29T13:07:09.078638",
+        "score": 1,
+        "word": "What is the meaning of 'international'?",
+        "type": "mcq"
+    },
+    {
+        "date": "2026-07-29T13:10:11.958570",
+        "score": 0,
+        "word": "What is the meaning of 'love'?",
+        "type": "mcq"
+    },
+    {
+        "date": "2026-07-29T13:37:29.548397",
+        "score": 1,
+        "word": "What is the meaning of 'absolute'?",
+        "type": "mcq"
+    }
+]

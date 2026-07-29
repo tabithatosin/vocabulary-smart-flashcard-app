@@ -4,14 +4,6 @@ import os
 from dotenv import load_dotenv
 from google import genai
 
-load_dotenv()
-import os
-import re
-import requests
-
-from dotenv import load_dotenv
-from google import genai
-
 
 load_dotenv()
 
